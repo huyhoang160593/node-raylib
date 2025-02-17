@@ -45,11 +45,12 @@ const SanitizeTypeName = (name) => {
 };
 
 const TypeUnwrappedLength = (structs, type) => {
+  let typeTransformed = type;
   if (type === "Camera") {
-    type = "Camera3D";
+    typeTransformed = "Camera3D";
   }
   if (type === "Texture2D") {
-    type = "Texture";
+    typeTransformed = "Texture";
   }
   let properties = 0;
   for (const struct of structs) {
@@ -292,7 +293,7 @@ inline rlVertexBuffer rlVertexBufferFromValue(const Napi::CallbackInfo& info, in
       #endif
       #if defined(GRAPHICS_API_OPENGL_ES2)
         (unsigned short *) pointerFromValue(info, index + 4),    // Vertex indices (in case vertex data comes indexed) (6 indices per quad)
-      #endif 
+      #endif
      (unsigned int*) pointerFromValue(info, index + 5),
      (unsigned int) pointerFromValue(info, index + 6)
   };

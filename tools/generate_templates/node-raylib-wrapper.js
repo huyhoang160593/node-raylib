@@ -27,11 +27,10 @@ const FlattenArgument = (structs, param) => {
     if (struct.name === param.type) {
       isStruct = true;
       for (const field of struct.fields) {
-        out +=
-          FlattenArgument(structs, {
-            type: field.type,
-            name: param.name + "." + field.name,
-          }) + ",\n    ";
+        out += `${FlattenArgument(structs, {
+          type: field.type,
+          name: `${param.name}.${field.name}`,
+        })},\n    `;
       }
       out = out.slice(0, out.length - 6); // remove final comma
     }
@@ -82,13 +81,11 @@ function ${func.name}(${!func.params ? "" : func.params.map((param) => param.nam
   return r.Bind${func.name}(${
     !func.params
       ? ""
-      : "\n    " +
-        func.params
+      : `\n    ${func.params
           .map((param) => {
             return FlattenArgument(structs, param);
           })
-          .join(",\n    ") +
-        "\n  "
+          .join(",\n    ")}\n  `
   })
 }
 raylib.${func.name} = ${func.name}`;
@@ -111,13 +108,11 @@ function ${func.name}(${!params ? "" : params.map((param) => param.name).join(",
   const obj = r.Bind${func.name}(${
     !params
       ? ""
-      : "\n    " +
-        params
+      : `\n    ${params
           .map((param) => {
             return FlattenArgument(structs, param);
           })
-          .join(",\n    ") +
-        "\n  "
+          .join(",\n    ")}\n  `
   })
   if (typeof obj !== 'undefined') {
     for (const key in obj) {
@@ -128,10 +123,10 @@ function ${func.name}(${!params ? "" : params.map((param) => param.name).join(",
 raylib.${func.name} = ${func.name}`;
 };
 
-const WrapConstructor = (structs, constructor) => {
+const WrapConstructor = (structs, compareConstructor) => {
   let info;
   for (const struct of structs) {
-    if (struct.name === constructor) info = struct;
+    if (struct.name === compareConstructor) info = struct;
   }
   if (info) {
     // Grab the description for the object.
@@ -155,7 +150,8 @@ function ${info.name}(${info.fields.map((field) => `${field.name}`).join(",")}) 
 }
 raylib.${info.name} = ${info.name}
 `;
-  } else return "";
+  }
+  return "";
 };
 
 module.exports = ({ functions, structs, enums, blocklist, byreflist }) => {
