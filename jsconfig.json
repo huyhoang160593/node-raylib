@@ -23,7 +23,7 @@
     ".npm",
     ".yarn"
   ],
-  "include": ["src","test"],
+  "include": ["src","test", "tools", "drm"],
   "typeAcquisition": {
     "enable": true,
     "include": [
