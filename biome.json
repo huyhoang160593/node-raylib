@@ -4,11 +4,12 @@
     "ignoreUnknown": true,
     "include": [
       "index.js",
-      "biome.json"
+      "drm/index.js",
+      "biome.json",
+      "tools/**/*.js",
+      "test/**/*.js"
     ],
-    "ignore": [
-      "./node_modules/**/*"
-    ]
+    "ignore": ["./node_modules/**/*"]
   },
   "organizeImports": {
     "enabled": true
@@ -33,12 +34,12 @@
   "javascript": {
     "formatter": {
       "jsxQuoteStyle": "single",
+      "trailingCommas": "all",
+      "semicolons": "always",
       "quoteProperties": "asNeeded",
-      "trailingCommas": "none",
-      "semicolons": "asNeeded",
       "arrowParentheses": "always",
       "bracketSameLine": false,
-      "quoteStyle": "single",
+      "quoteStyle": "double",
       "attributePosition": "auto",
       "bracketSpacing": true
     }

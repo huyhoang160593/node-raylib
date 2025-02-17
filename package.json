@@ -5,6 +5,8 @@
   "main": "index.js",
   "types": "src/generated/node-raylib.d.ts",
   "scripts": {
+    "biome:check":"biome check",
+    "biome:write": "biome check --write",
     "start": "bin/node-raylib examples/core/core_basic_window.js",
     "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
     "test": "vitest run --config ./vitest.config.js --reporter verbose",

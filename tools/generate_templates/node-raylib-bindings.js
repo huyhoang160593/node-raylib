@@ -103,7 +103,7 @@ const UnwrappedFuncArguments = (structs, func) => {
  */
 const FromValue = (structs, struct) => `
 inline ${struct.name} ${SanitizeTypeName(
-  struct.name
+  struct.name,
 )}FromValue(const Napi::CallbackInfo& info, int index) {
   return {
     ${UnwrappedStructProperties(structs, struct)}
@@ -120,7 +120,7 @@ inline Napi::Value ToValue(Napi::Env env, ${struct.name} obj) {
   Napi::Object out = Napi::Object::New(env);
   ${struct.fields
     .map(
-      (field) => `out.Set("${field.name}", ToValue(env, obj.${field.name}));`
+      (field) => `out.Set("${field.name}", ToValue(env, obj.${field.name}));`,
     )
     .join("\n  ")}
   return out;
@@ -178,7 +178,7 @@ Napi::Value Bind${func.name}(const Napi::CallbackInfo& info) {
                 length += TypeUnwrappedLength(structs, param.type);
                 return out;
               })
-              .join(",\n      ")
+              .join(",\n      "),
           )
     }
   );
@@ -305,7 +305,7 @@ ${structs
       !blocklist.includes(name) &&
       name !== "rlVertexBuffer" &&
       name !== "AutomationEvent" &&
-      name !== "ModelAnimation"
+      name !== "ModelAnimation",
   )
   .map((struct) => {
     return FromValue(structs, struct);
