@@ -7,7 +7,7 @@
   "scripts": {
     "start": "bin/node-raylib examples/core/core_basic_window.js",
     "benchmark": "bin/node-raylib examples/textures/textures_bunnymark.js",
-    "test": "vitest run --globals --reporter verbose",
+    "test": "vitest run --config ./vitest.config.js --reporter verbose",
     "test:watch": "vitest --globals --ui",
     "posttest": "standard tools test examples index.js",
     "test:fix": "standard --fix",
@@ -67,7 +67,8 @@
   "homepage": "https://github.com/RobLoach/node-raylib",
   "dependencies": {
     "cross-fetch": "^3.1.5",
-    "module-alias": "^2.2.2"
+    "module-alias": "^2.2.2",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@raylib/api": "5.5.0",

@@ -1,9 +1,8 @@
 /* global describe, it, expect */
-
-const { execFileSync } = require('child_process')
-const path = require('path')
+import {execFileSync} from "node:child_process"
+import path from "node:path"
+import packageJson from "@/package.json"
 const r = require('..')
-const pkg = require('../package.json')
 
 r.SetTraceLogLevel(r.LOG_WARNING)
 
@@ -44,7 +43,7 @@ describe('raylib', () => {
       expect(r.KEY_A).toBe(65)
     })
     it('PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA', () => {
-      expect(r.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA).toBe(20)
+      expect(r.PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA).toBe(23)
     })
   })
 
@@ -137,7 +136,7 @@ if (process.platform !== 'win32') {
         output = e.toString()
       }
 
-      expect(output).toContain(pkg.description)
+      expect(output).toContain(packageJson.description)
     })
   })
 }
