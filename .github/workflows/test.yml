@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
       - name: Code Style Check
-        run: npx @biomejs/biome check
+        run: npx @biomejs/biome@1.9.4 check
 
   build:
     strategy:
