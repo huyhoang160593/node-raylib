@@ -3,9 +3,10 @@
   "files": {
     "ignoreUnknown": true,
     "include": [
+      "vitest.config.js",
+      "biome.json",
       "index.js",
       "drm/index.js",
-      "biome.json",
       "tools/**/*.js",
       "test/**/*.js"
     ],
