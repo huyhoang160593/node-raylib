@@ -12,9 +12,8 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v2
       - name: Code Style Check
-        run: npx -y prettier -c .
-        # run: npx @biomejs/biome format . # do this after we move to biome config
-      
+        run: npx @biomejs/biome check
+
   build:
     strategy:
       fail-fast: false
